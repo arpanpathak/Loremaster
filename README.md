@@ -5,17 +5,6 @@ ____
 
 Loremaster is a RAG (Retrieval-Augmented Generation) chat app built on top of 230,000+ pages of WoW game data. User questions are matched against an Elasticsearch index, the most relevant pages are injected as context into a Claude prompt, and the response streams back to a WoW-themed chat UI.
 
-**Tech Stack:**
-- Scraper - Go 
-- Data cleaning - Python, mwparserfromhell
-- Database - PostgreSQL (Neon)
-- Search - Elasticsearch (Elastic Cloud Serverless)
-- Evaluations - Jupyter Notebooks, Python
-- Backend - FastAPI, Python
-- Claude Haiku
-- Streaming - Server-Sent Events (SSE)
-- Frontend - React, Vite
-
 **Elasticsearch Query Design:**
 
 - Field weights (title^4, summary^2, content) boosts relevance score based on where the match is found. A match in the title is 4x more relevant than a match in the body. **Justification:** Someone searching "Arthas" probably wants the Arthas page, not every page that mentions him in passing.
@@ -37,6 +26,17 @@ The current keyword search retrieves individual articles well [but has no awaren
 - [x] Assess adding ELSER sparse vector search alongside the existing keyword search using RRF (Reciprocal Rank Fusion) to combine rankings, improving retrieval on conceptual and semantic queries. (some evals [here)](https://github.com/emalinegayhart/Loremaster/issues/27#issuecomment-4125733142)
 - [ ] Assess a knowledge graph to model relationships between entities (quests, NPCs, zones, factions) so the system can traverse connections rather than retrieve isolated snippets.
 - [ ] Assess implementing GraphRAG to enable graph-aware retrieval that understands narrative continuity, enabling accurate responses to questions like "walk me through the Wrathgate quest chain" (may seem a little overkill but i wanted to learn this new tech anyways :D!).
+
+**Tech Stack:**
+- Scraper - Go 
+- Data cleaning - Python, mwparserfromhell
+- Database - PostgreSQL (Neon)
+- Search - Elasticsearch (Elastic Cloud Serverless)
+- Evaluations - Jupyter Notebooks, Python
+- Backend - FastAPI, Python
+- Claude Haiku
+- Streaming - Server-Sent Events (SSE)
+- Frontend - React, Vite
 
 **Test Plan:**
 
